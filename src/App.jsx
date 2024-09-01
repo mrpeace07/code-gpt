@@ -54,10 +54,11 @@ function App() {
             >
               {/* Logo next to the title */}
               <img
-                src="src/assets/extension-logo.png"
-                alt="Extension Logo"
-                className="h-10 w-10 mr-3"
-              />
+  src="/assets/extension-logo.png"
+  alt="Extension Logo"
+  className="h-10 w-10 mr-3"
+/>
+
               <h1 className="text-4xl font-bold text-blue-500 animate-bounce">
                 Code Tracker
               </h1>
