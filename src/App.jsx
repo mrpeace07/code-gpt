@@ -90,7 +90,7 @@ function App() {
         <div className="flex justify-center space-x-4">
           {/* Link for "Connect with us" */}
           <a
-            href="https://example.com/connect"  // Replace with your actual connect URL
+            href="https://www.linkedin.com/in/nishanth-s-35b515222"  // Replace with your actual connect URL
             target="_blank"
             rel="noopener noreferrer"
             className="text-lg hover:underline"
