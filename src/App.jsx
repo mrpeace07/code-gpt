@@ -47,7 +47,7 @@ function App() {
         >
           <div className="flex items-center justify-center mb-4">
             <a
-              href="https://github.com/Vishesh-Pandey/chat-ai"
+              href="https://github.com/mrpeace07/code-gpt"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center"
@@ -100,7 +100,7 @@ function App() {
 
           {/* Link for "Wish to contribute" */}
           <a
-            href="https://example.com/contribute" // Replace with your actual contribute URL
+            href="https://github.com/mrpeace07/code-gpt" // Replace with your actual contribute URL
             target="_blank"
             rel="noopener noreferrer"
             className="text-lg hover:underline"
