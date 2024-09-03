@@ -78,7 +78,7 @@ function App() {
             }`}
             disabled={generatingAnswer}
           >
-            Ask Any questions
+            Get Answer
           </button>
         </form>
         <div className="w-full max-w-4xl text-center rounded-lg bg-white my-4 shadow-lg p-4 transition-all duration-500 transform hover:scale-105">
