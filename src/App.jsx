@@ -7,6 +7,7 @@ function App() {
   const [answer, setAnswer] = useState("");
   const [generatingAnswer, setGeneratingAnswer] = useState(false);
 
+  // Function to generate answer
   async function generateAnswer(e) {
     setGeneratingAnswer(true);
     e.preventDefault();
@@ -33,83 +34,110 @@ function App() {
     setGeneratingAnswer(false);
   }
 
+  const containsCode = (text) => {
+    // A simple regex to check for code blocks (e.g., ```code```)
+    return /```.*```/s.test(text);
+  };
+
   return (
-    <>
-      {/* Header Section */}
-      <header className="w-full bg-blue-500 text-white text-center p-4">
-        <h2 className="text-2xl font-semibold">You can ask any doubts here!</h2>
+    <div className="bg-gray-100 min-h-screen flex flex-col justify-between">
+      {/* Light Mode Navbar */}
+      <header className="bg-blue-600 w-full py-4 text-white text-center shadow-lg flex flex-col items-center px-6">
+        <h1 className="text-2xl font-semibold">CodeTracker</h1>
+        <p className="text-md italic">"Ask & Discover: AI-Powered Insights"</p>
       </header>
 
-      <div className="bg-gradient-to-r from-blue-50 to-blue-100 min-h-screen p-3 flex flex-col justify-center items-center">
-        <form
-          onSubmit={generateAnswer}
-          className="w-full max-w-4xl text-center rounded-lg shadow-lg bg-white py-6 px-4 transition-all duration-500 transform hover:scale-105"
-        >
-          <div className="flex items-center justify-center mb-4">
-            <a
-              href="https://github.com/mrpeace07/code-gpt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center"
-            >
-              {/* Logo next to the title */}
-              <img
-  src="/assets/extension-logo.png"
-  alt="Extension Logo"
-  className="h-10 w-10 mr-3"
-/>
+      <main className="flex-grow w-full max-w-3xl mx-auto p-6 bg-white shadow-xl rounded-lg mt-10 mb-16">
+        <div className="flex flex-col space-y-6">
+          {/* Catchy Header */}
+          <header className="text-center">
+            <h2 className="text-2xl font-semibold text-blue-600 mb-4">
+              Ask & Discover: AI-Powered Insights
+            </h2>
+            <p className="text-gray-600 text-sm">
+              Get instant, intelligent responses to your questions. Dive into a
+              world of knowledge at your fingertips!
+            </p>
+          </header>
 
-              <h1 className="text-4xl font-bold text-blue-500 animate-bounce">
-                Code Tracker
-              </h1>
-            </a>
+          {/* Chat Bubbles */}
+          <div className="flex flex-col space-y-4">
+            {/* User Question */}
+            {question && (
+              <div className="self-start bg-blue-500 text-white p-4 rounded-lg shadow-md w-fit max-w-full break-words">
+                <p className="text-sm">{question}</p>
+              </div>
+            )}
+
+            {/* AI Answer */}
+            {generatingAnswer ? (
+              <div className="self-start bg-gray-300 text-gray-700 p-4 rounded-lg shadow-md w-fit max-w-full break-words">
+                <div className="animate-pulse">AI is typing...</div>
+              </div>
+            ) : (
+              answer && (
+                <div
+                  className={`self-start p-4 rounded-lg shadow-md w-fit max-w-full break-words ${
+                    containsCode(answer)
+                      ? "bg-gray-800 text-white"
+                      : "bg-gray-100 text-gray-900"
+                  }`}
+                >
+                  <ReactMarkdown>{answer}</ReactMarkdown>
+                </div>
+              )
+            )}
           </div>
-          <textarea
-            required
-            className="border border-gray-300 rounded w-full my-2 min-h-[150px] p-3 transition-all duration-300 focus:border-blue-400 focus:shadow-lg"
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            placeholder="Ask anything"
-          ></textarea>
-          <button
-            type="submit"
-            className={`bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 transition-all duration-300 ${
-              generatingAnswer ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-            disabled={generatingAnswer}
-          >
-            Get Answer
-          </button>
-        </form>
-        <div className="w-full max-w-4xl text-center rounded-lg bg-white my-4 shadow-lg p-4 transition-all duration-500 transform hover:scale-105">
-          <ReactMarkdown>{answer}</ReactMarkdown>
-        </div>
-      </div>
 
-      <footer className="w-full bg-blue-500 text-white text-center p-4">
-        <div className="flex justify-center space-x-4">
-          {/* Link for "Connect with us" */}
+          {/* Input Form */}
+          <form
+            onSubmit={generateAnswer}
+            className="w-full flex items-center space-x-2"
+          >
+            <textarea
+              required
+              className="border border-gray-400 bg-white text-gray-800 rounded-lg w-full min-h-[80px] p-3 transition-all duration-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 resize-none"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="Type your question..."
+            ></textarea>
+            <button
+              type="submit"
+              className={`bg-blue-600 text-white px-6 py-3 rounded-lg transition-all duration-300 hover:bg-blue-700 ${
+                generatingAnswer ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              disabled={generatingAnswer}
+            >
+              {generatingAnswer ? "Generating..." : "Send"}
+            </button>
+          </form>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="w-full py-4 bg-gray-100">
+        <div className="flex justify-center space-x-4 text-blue-700 text-center">
+          {/* Links */}
           <a
-            href="https://linktr.ee/mr.peace07"  // Replace with your actual connect URL
+            href="https://linktr.ee/mr.peace07"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-lg hover:underline"
+            className="hover:underline"
           >
             Connect with us
           </a>
 
-          {/* Link for "Wish to contribute" */}
           <a
-            href="https://github.com/mrpeace07/code-gpt" // Replace with your actual contribute URL
+            href="https://github.com/mrpeace07/code-gpt"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-lg hover:underline"
+            className="hover:underline"
           >
             Wish to contribute
           </a>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
 
